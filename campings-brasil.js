@@ -276,5 +276,6 @@ window.CAMPINGS_BR = [
   { n:"Camping do PikoSam", uf:"RJ", reg:"Sudeste", tipo:"camping", lat:-22.25217, lng:-44.48233, nota:"Chuveiro/energia. www.campingdopikosam.com.br/o-camping (OSM)" , ig:"campingdopikosam"},
   { n:"Recanto das Acácias", uf:"GO", reg:"Centro-Oeste", tipo:"camping", lat:-15.7996, lng:-48.80559, nota:"Aceita motorhome, barraca, banheiro/wi-fi. (OSM)" },
   { n:"Glamping Meraki Brasil", uf:"PR", reg:"Sul", tipo:"camping", lat:-25.40348, lng:-48.76642, nota:"Wi-fi. tel. +55 41 99201 5410 · www.instagram.com/glamping_merakibrasil (OSM)" , ig:"glamping_merakibrasil"},
+  { n:"Camping Cactus do Rústico", uf:"BA", reg:"Nordeste", tipo:"camping", lat:-14.289951, lng:-38.993877, nota:"Rua dos Jacarandás, Alto da Boa Vista, a 800 m das praias principais de Itacaré. Aceita motorhome, barraca, chalés, pet friendly, chuveiro quente/banheiro/energia/wi-fi, cozinha coletiva. tel. +55 71 98668-2428 (MaCamp)" },
 
 ];
