@@ -2928,7 +2928,7 @@ window.ROTEIROS = (function(){
       id:"patagonia",
       nome:"Patagônia — Argentina & Chile",
       resumo:"Recursos para a travessia BR→AR→CL: postos de diesel, fronteiras, SENASA/SAG, oficinas, wild camping e documentação.",
-      recursos:["catalogo.html","camping.html","postos.html","oficinas.html","fronteiras.html","senasa.html","documentacao.html","logistica.html"]
+      recursos:["catalogo.html","camping.html","postos.html","oficinas.html","fronteiras.html","senasa.html","documentacao.html","pet.html","logistica.html"]
     },
     minas: {
       id:"minas",
@@ -3006,7 +3006,7 @@ window.ROTEIROS = (function(){
       id:"uruguai",
       nome:"Uruguai — Costa & Colônia",
       resumo:"Roteiros pelo Uruguai (entrada pela fronteira do Chuí): costa atlântica, vinhedos e Colonia del Sacramento. Leve documentação e seguro do veículo.",
-      recursos:["postos.html","fronteiras.html","documentacao.html"]
+      recursos:["postos.html","fronteiras.html","documentacao.html","pet.html"]
     },
     pantanal: {
       id:"pantanal",
@@ -3024,43 +3024,43 @@ window.ROTEIROS = (function(){
       id:"paraguai",
       nome:"Paraguai — Missões & Capital",
       resumo:"Roteiro pelo Paraguai (entrada por Ciudad del Este): Itaipu, ruínas jesuíticas e Asunción. Leve documentação e seguro do veículo.",
-      recursos:["postos.html","fronteiras.html","documentacao.html"]
+      recursos:["postos.html","fronteiras.html","documentacao.html","pet.html"]
     },
     bolivia: {
       id:"bolivia",
       nome:"Bolívia — Altiplano",
       resumo:"Roteiro andino pela Bolívia: La Paz, Titicaca, Sucre/Potosí e o Salar de Uyuni. Atenção à altitude; leve documentação e seguro.",
-      recursos:["postos.html","fronteiras.html","documentacao.html"]
+      recursos:["postos.html","fronteiras.html","documentacao.html","pet.html"]
     },
     peru: {
       id:"peru",
       nome:"Peru — Andes & Inca",
       resumo:"Roteiro andino e inca: Lima, Arequipa/Colca, Cusco, Machu Picchu e o Titicaca. Atenção à altitude e reserve Machu Picchu com antecedência.",
-      recursos:["postos.html","fronteiras.html","documentacao.html"]
+      recursos:["postos.html","fronteiras.html","documentacao.html","pet.html"]
     },
     argentina: {
       id:"argentina",
       nome:"Argentina — Noroeste (NOA)",
       resumo:"Roteiro pelo noroeste argentino: Salta, Cafayate e a Quebrada de Humahuaca. Atenção à altitude; leve documentação e seguro do veículo.",
-      recursos:["postos.html","fronteiras.html","documentacao.html"]
+      recursos:["postos.html","fronteiras.html","documentacao.html","pet.html"]
     },
     chile: {
       id:"chile",
       nome:"Chile — Deserto do Atacama",
       resumo:"Roteiro pelo Atacama: San Pedro, Valle de la Luna, gêiseres do Tatio e lagunas altiplânicas. Conecta com a Bolívia pelo Hito Cajón.",
-      recursos:["postos.html","fronteiras.html","documentacao.html"]
+      recursos:["postos.html","fronteiras.html","documentacao.html","pet.html"]
     },
     equador: {
       id:"equador",
       nome:"Equador — Andes",
       resumo:"Roteiro andino pelo Equador: Quito, Cotopaxi, Quilotoa e Cuenca. Atenção à altitude; leve documentação e seguro do veículo.",
-      recursos:["postos.html","fronteiras.html","documentacao.html"]
+      recursos:["postos.html","fronteiras.html","documentacao.html","pet.html"]
     },
     colombia: {
       id:"colombia",
       nome:"Colômbia",
       resumo:"Roteiro pela Colômbia: Bogotá, Eixo Cafeeiro, Medellín e Cartagena. Atenção às distâncias; voos internos são comuns.",
-      recursos:["postos.html","fronteiras.html","documentacao.html"]
+      recursos:["postos.html","fronteiras.html","documentacao.html","pet.html"]
     },
     venezuela: {
       id:"venezuela",

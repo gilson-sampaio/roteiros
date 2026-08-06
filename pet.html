@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viajar com pet · Planejador de Roteiros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo-doc.css">
+<style>
+  .wrap{max-width:1000px}
+
+  /* ---- aviso de atualização ---- */
+  .stamp{display:inline-flex;align-items:center;gap:7px;font-family:"JetBrains Mono",monospace;font-size:10.5px;
+    letter-spacing:.05em;text-transform:uppercase;color:var(--amber);background:color-mix(in srgb,var(--amber) 9%,#fff);
+    border:1px solid color-mix(in srgb,var(--amber) 26%,#fff);border-radius:20px;padding:5px 11px;margin-bottom:14px}
+  .stamp svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2}
+
+  /* ---- linha do tempo ---- */
+  .tl{position:relative;margin-top:6px;padding-left:26px}
+  .tl::before{content:"";position:absolute;left:7px;top:9px;bottom:9px;width:2px;
+    background:linear-gradient(180deg,var(--teal),var(--amber),var(--red))}
+  .tl-item{position:relative;padding:0 0 20px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{content:"";position:absolute;left:-24px;top:5px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--tc,var(--teal))}
+  .tl-when{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.04em;
+    color:var(--tc,var(--teal));text-transform:uppercase}
+  .tl-what{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:15px;letter-spacing:-.01em;margin:2px 0 3px}
+  .tl-desc{font-size:12.8px;color:var(--slate);line-height:1.45}
+  .tl-desc b{color:var(--ink)}
+
+  /* ---- filtro países ---- */
+  .filters{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:4px 0 16px}
+  .chip{font-size:12px;font-weight:600;color:var(--slate);background:var(--panel);border:1px solid var(--line);
+    border-radius:20px;padding:6px 12px;cursor:pointer;transition:all .16s;white-space:nowrap}
+  .chip:hover{border-color:#cfd5de}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  /* ---- cards país ---- */
+  .countries{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:15px}
+  .ccard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 17px;
+    box-shadow:var(--shadow);border-left:3px solid var(--cc,var(--line));display:flex;flex-direction:column;gap:11px;
+    transition:transform .16s,box-shadow .16s}
+  .ccard:hover{transform:translateY(-2px);box-shadow:0 16px 36px -18px rgba(22,32,44,.26)}
+  .ccard.hidden{display:none}
+  .ccard .chead{display:flex;align-items:flex-start;gap:10px}
+  .ccard .flag{font-size:24px;line-height:1;flex-shrink:0;margin-top:1px}
+  .ccard h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:16.5px;letter-spacing:-.01em;line-height:1.15}
+  .ccard .auth{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.04em;color:var(--faint);
+    text-transform:uppercase;margin-top:3px}
+  .ccard .tag{margin-left:auto;font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:9.5px;
+    letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--cc);border-radius:20px;
+    padding:4px 9px;white-space:nowrap;flex-shrink:0}
+  .ccard ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .ccard li{font-size:12.6px;color:var(--slate);line-height:1.42;padding-left:15px;position:relative}
+  .ccard li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:var(--cc)}
+  .ccard li b{color:var(--ink)}
+  .ccard .alert{font-size:12.2px;line-height:1.42;background:color-mix(in srgb,var(--amber) 8%,#fff);
+    border:1px solid color-mix(in srgb,var(--amber) 24%,#fff);border-radius:9px;padding:9px 11px;color:var(--slate)}
+  .ccard .alert b{color:#92400E}
+  .ccard .src{margin-top:auto;padding-top:10px;border-top:1px solid var(--line-soft);font-size:11.5px}
+  .ccard .src a{color:var(--teal);text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:5px}
+  .ccard .src a:hover{text-decoration:underline}
+  .ccard .src svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+
+  /* ---- destaque CVA ---- */
+  .spot{background:linear-gradient(135deg,color-mix(in srgb,var(--teal) 7%,#fff),var(--panel));
+    border:1px solid color-mix(in srgb,var(--teal) 24%,#fff);border-radius:15px;padding:20px 22px;
+    box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+  .spot h3{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:18px;letter-spacing:-.015em;
+    display:flex;align-items:center;gap:10px}
+  .spot h3 .ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex-shrink:0;
+    background:color-mix(in srgb,var(--teal) 13%,#fff);border:1px solid color-mix(in srgb,var(--teal) 28%,#fff)}
+  .spot h3 .ic svg{width:17px;height:17px;stroke:var(--teal);fill:none;stroke-width:2}
+  .spot p{font-size:13.2px;color:var(--slate);line-height:1.5}
+  .spot p b{color:var(--ink)}
+
+  @media(max-width:560px){
+    .countries{grid-template-columns:1fr}
+    .spot{padding:16px 17px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="backlink" href="app.html"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Voltar ao app</a>
+
+  <div class="brandline"><span class="dot"></span>américa do sul · cão &amp; gato · medidas administrativas</div>
+  <h1>Viajar com <span class="hl">pet</span></h1>
+  <p class="lead">Tudo o que precisa estar em ordem para atravessar fronteiras da América do Sul com cão ou gato — <b>documentos, prazos, ordem das etapas e o órgão de cada país</b>. É a parte da viagem que mais exige antecedência: nada aqui se resolve na véspera.</p>
+
+  <div class="stamp">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+    Regras conferidas em agosto de 2026 · confirme antes de viajar
+  </div>
+
+  <div class="callout">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+    <div><h4>Leia isto primeiro</h4><p>Exigências sanitárias mudam com frequência e <b>sem aviso</b> — o Chile alterou as suas em julho de 2026. Este módulo organiza o processo e aponta o órgão oficial de cada país, mas a <b>fonte final é sempre o órgão do país de destino</b>. Confirme perto da viagem e leve tudo impresso: em fronteira remota não há sinal para abrir PDF.</p></div>
+  </div>
+
+  <!-- ===== 01 · BASE ===== -->
+  <div class="section">
+    <div class="section-h"><span class="sn">01</span><h2>A base — vale para todos os países</h2><span class="note">sem isto, nada anda</span></div>
+    <p class="lead" style="margin-top:0">Quatro itens formam a espinha dorsal de qualquer viagem internacional com pet. Todo o resto é papel emitido em cima deles.</p>
+    <table class="tbl" style="margin-top:16px">
+      <thead><tr><th>Item</th><th class="num">Prazo</th><th>Detalhe</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>Microchip</b></td>
+          <td class="num">Antes de tudo</td>
+          <td class="muted">Padrão <b>ISO 11784/11785</b>. Desde <b>27/07/2026 o Chile exige</b> identificação individual permanente (microchip ou tatuagem) e o número precisa <b>bater com o do certificado</b>. Faça primeiro: todo o resto da papelada é emitida referenciando este número.</td>
+        </tr>
+        <tr>
+          <td><b>Vacina antirrábica</b></td>
+          <td class="num">≥ 21 dias antes</td>
+          <td class="muted">Animal com <b>mais de 90 dias</b> de vida. Se for a <b>primeira dose</b>, precisa de no mínimo <b>21 dias</b> de carência antes da entrada. Reforços em dia não têm carência, mas a vacina precisa estar <b>vigente</b> na data do cruzamento.</td>
+        </tr>
+        <tr>
+          <td><b>Antiparasitário interno e externo</b></td>
+          <td class="num">5 a 15 dias antes</td>
+          <td class="muted">O Brasil pede <b>até 15 dias</b> antes do CVI; o Chile exige entre <b>5 e 30 dias</b> antes do certificado. Fazendo entre <b>5 e 15 dias</b> antes você atende aos dois. Precisa ficar <b>registrado pelo veterinário</b>, com produto e data.</td>
+        </tr>
+        <tr>
+          <td><b>Atestado de saúde</b></td>
+          <td class="num">≤ 10 dias antes</td>
+          <td class="muted">Exame clínico por veterinário com <b>CRMV ativo</b>, atestando boa saúde e ausência de doenças infectocontagiosas. É o documento que sustenta a emissão do CVI. Validade curta — não adiante demais.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== 02 · CVI x PASSAPORTE ===== -->
+  <div class="section">
+    <div class="section-h"><span class="sn">02</span><h2>CVI ou Passaporte — qual emitir</h2><span class="note">MAPA / VIGIAGRO</span></div>
+    <p class="lead" style="margin-top:0">São dois caminhos para o mesmo fim. Para <b>viagem longa com vários países</b>, o passaporte costuma compensar; para uma saída pontual, o CVI resolve.</p>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card acc" style="--ac:var(--blue)">
+        <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M14 3v5h5M14 3l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg></span>CVI — Certificado Veterinário Internacional</h3>
+        <p>Emitido <b>a cada viagem</b>. Sai rápido (pode ser até no dia do embarque, com agendamento), mas <b>vale só para aquela saída</b>. Se for cruzar fronteira várias vezes, terá de reemitir a cada trecho.</p>
+      </div>
+      <div class="card acc" style="--ac:var(--green)">
+        <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><circle cx="12" cy="10" r="2.6"/><path d="M7.5 17c1-2.2 2.6-3.2 4.5-3.2s3.5 1 4.5 3.2"/></svg></span>Passaporte para Trânsito de Cães e Gatos</h3>
+        <p>Vale <b>por toda a vida do animal</b>, sem prazo de validade — desde que as vacinas sigam em dia. Leva cerca de <b>1 mês</b> para o VIGIAGRO expedir. <b>Melhor escolha para motorhome</b> em viagem longa e multi-país.</p>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:16px">
+      <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.4"/></svg>
+      <div><h4>Onde emitir</h4><p>Unidades do <b>VIGIAGRO</b> (aeroportos, portos e postos de fronteira) ou nas <b>Superintendências Federais de Agricultura</b> nos estados. O atendimento é <b>apenas com agendamento prévio</b> — procure a unidade com <b>30 dias de antecedência</b>, e deixe a emissão para a janela de 10 a 2 dias antes da partida.</p></div>
+    </div>
+    <div class="callout" style="margin-top:14px">
+      <svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v7l9 4 9-4V7"/></svg>
+      <div><h4>Atenção ao modelo do certificado</h4><p>A <b>Portaria MAPA nº 741/2024</b> incorporou o novo modelo de CVI do Mercosul (Resolução GMC/RES nº 20/2024). Desde <b>6 de setembro de 2025</b> ele é obrigatório — <b>CVI no formato antigo pode ser recusado</b> na fronteira. Confirme com o VIGIAGRO que o documento emitido é o modelo vigente.</p></div>
+    </div>
+  </div>
+
+  <!-- ===== 03 · LINHA DO TEMPO ===== -->
+  <div class="section">
+    <div class="section-h"><span class="sn">03</span><h2>Linha do tempo — ordem de execução</h2><span class="note">conte de trás para frente</span></div>
+    <p class="lead" style="margin-top:0">A ordem importa: cada etapa só pode ser feita depois da anterior. Comece a contar a partir da <b>data do cruzamento da fronteira</b>, não da data de saída de casa.</p>
+    <div class="tl" style="margin-top:18px">
+      <div class="tl-item" style="--tc:var(--teal)">
+        <div class="tl-when">D-60 ou antes</div>
+        <div class="tl-what">Microchip + conferir a antirrábica</div>
+        <div class="tl-desc">Implante o microchip <b>antes de qualquer outra coisa</b>. Verifique a validade da antirrábica: se vencer no meio da viagem, revacine agora — não no meio do caminho.</div>
+      </div>
+      <div class="tl-item" style="--tc:var(--teal)">
+        <div class="tl-when">D-45 a D-30</div>
+        <div class="tl-what">Passaporte (se optar por ele) + agendamento</div>
+        <div class="tl-desc">O passaporte leva <b>~1 mês</b> para sair. Mesmo indo de CVI, é aqui que se contata a unidade do VIGIAGRO — o atendimento é só <b>com hora marcada</b> e as agendas lotam.</div>
+      </div>
+      <div class="tl-item" style="--tc:var(--amber)">
+        <div class="tl-when">D-30 a D-15</div>
+        <div class="tl-what">Autorizações prévias do destino</div>
+        <div class="tl-desc">O <b>Chile exige Autorização Sanitária do SAG solicitada com antecedência</b>. Peru e outros países podem pedir permissão prévia. Resolva agora — sem isso, o certificado brasileiro sozinho não abre a fronteira.</div>
+      </div>
+      <div class="tl-item" style="--tc:var(--amber)">
+        <div class="tl-when">D-15 a D-5</div>
+        <div class="tl-what">Antiparasitário interno e externo</div>
+        <div class="tl-desc">Janela que atende Brasil e Chile ao mesmo tempo. Exija o <b>registro no prontuário</b>: nome do produto, princípio ativo e data. Sem registro, não conta.</div>
+      </div>
+      <div class="tl-item" style="--tc:var(--red)">
+        <div class="tl-when">D-10</div>
+        <div class="tl-what">Exame clínico e atestado de saúde</div>
+        <div class="tl-desc">Consulta com veterinário de <b>CRMV ativo</b>. O atestado tem <b>validade de 10 dias</b> — é ele que trava o cronograma, então tudo depois daqui é corrida contra o relógio.</div>
+      </div>
+      <div class="tl-item" style="--tc:var(--red)">
+        <div class="tl-when">D-10 a D-2</div>
+        <div class="tl-what">Emissão do CVI no VIGIAGRO</div>
+        <div class="tl-desc">Leve <b>atestado, carteira de vacinação, comprovante do microchip e registro do antiparasitário</b>. Não deixe para o último dia: se faltar um papel, não há tempo de refazer.</div>
+      </div>
+      <div class="tl-item" style="--tc:var(--red)">
+        <div class="tl-when">Na fronteira</div>
+        <div class="tl-what">Verificação pelo órgão do país de destino</div>
+        <div class="tl-desc">SENASA, SAG e afins fazem <b>três conferências: documental, física e de identidade</b> — leem o microchip e comparam com o certificado. Na Argentina, entrando como bagagem acompanhada, <b>não há custo</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 04 · PAÍS A PAÍS ===== -->
+  <div class="section">
+    <div class="section-h"><span class="sn">04</span><h2>País a país</h2><span class="note">13 destinos</span></div>
+    <p class="lead" style="margin-top:0">Cada país tem seu órgão sanitário e suas exigências. Os do <b>Mercosul</b> seguem o modelo de CVI harmonizado; os demais pedem certificado próprio. Clique na fonte oficial para conferir antes de sair.</p>
+    <div class="filters" id="filters"></div>
+    <div class="countries" id="countries"></div>
+  </div>
+
+  <!-- ===== 05 · CVA ===== -->
+  <div class="section">
+    <div class="section-h"><span class="sn">05</span><h2>Patagônia — o certificado que quase ninguém conhece</h2><span class="note">AR ↔ CL</span></div>
+    <div class="spot">
+      <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/><circle cx="12" cy="12" r="9"/></svg></span>CVA — Certificado Veterinário Austral</h3>
+      <p>Quem roda a Patagônia ou a Carretera Austral <b>cruza a fronteira AR↔CL várias vezes</b> — e emitir um CVI novo a cada passagem seria inviável. Para esse caso existe o <b>CVA</b>, previsto para o trânsito terrestre <b>Argentina→Argentina via Chile</b> ou <b>Chile→Chile via Argentina</b>.</p>
+      <p>O caminho é: passar pelo veterinário, cumprir os requisitos e, <b>com turno agendado</b>, ir à oficina certificadora do SENASA obter o CVA. Se o seu roteiro tem vários cruzamentos — Integración Austral, Cerro Castillo, Chile Chico, Cardenal Samoré — <b>pergunte pelo CVA já no primeiro contato com o SENASA</b>, antes de entrar na Argentina.</p>
+      <p style="font-size:12.6px;color:var(--faint)">Como o CVA é emitido pelo SENASA em território argentino, confirme com eles o procedimento exato para quem chega do Brasil — o roteiro varia conforme o ponto de entrada.</p>
+    </div>
+  </div>
+
+  <!-- ===== 06 · VOLTA ===== -->
+  <div class="section">
+    <div class="section-h"><span class="sn">06</span><h2>A volta para o Brasil</h2><span class="note">não esqueça desta parte</span></div>
+    <p class="lead" style="margin-top:0">Erro clássico: planejar só a ida. Para <b>reentrar no Brasil</b>, o pet precisa de certificado emitido pela <b>autoridade veterinária oficial do país onde ele está</b> — não vale o CVI brasileiro da ida, que já foi usado.</p>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card acc" style="--ac:var(--amber)">
+        <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 12l6-6M3 12l6 6"/></svg></span>Providencie no destino</h3>
+        <p>Antes de voltar, procure o órgão local (<b>SENASA</b> na Argentina, <b>SAG</b> no Chile, etc.) para emitir o certificado de saída. Isso exige <b>consulta veterinária local e agendamento</b> — reserve alguns dias no fim do roteiro.</p>
+      </div>
+      <div class="card acc" style="--ac:var(--red)">
+        <h3><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Atenção ao calendário</h3>
+        <p>Antirrábica e antiparasitário precisam continuar <b>vigentes na data do retorno</b>. Em viagem de meses, é comum a vacina vencer no meio do caminho — verifique isso <b>antes de sair</b> e programe o reforço.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 07 · NA PRÁTICA ===== -->
+  <div class="section">
+    <div class="section-h"><span class="sn">07</span><h2>Na estrada, com ele junto</h2><span class="note">o que os papéis não dizem</span></div>
+    <div class="grid2">
+      <div class="card acc" style="--ac:var(--red)">
+        <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><path d="M9 9h6"/></svg></span>Parques nacionais barram cães</h3>
+        <p>Torres del Paine, Los Glaciares, PN Tierra del Fuego e a maioria dos parques da região <b>não permitem cães nas trilhas</b> — nem no estacionamento, em alguns casos. Descubra isso <b>antes</b>, não no portão: ou escolhe áreas pet-friendly, ou combina com quem fica.</p>
+      </div>
+      <div class="card acc" style="--ac:var(--green)">
+        <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 8h16l-1.5 11a2 2 0 0 1-2 1.8H7.5a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span>Ração e medicação</h3>
+        <p>Marcas mudam entre países e trocar ração de repente <b>causa problema intestinal</b> justo na estrada. Leve estoque para o trecho e a <b>medicação de uso contínuo com receita</b>. O SAG chileno é rigoroso com alimentos — declare a ração.</p>
+      </div>
+      <div class="card acc" style="--ac:var(--blue)">
+        <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.4"/></svg></span>Veterinário na rota</h3>
+        <p>Mapeie clínicas nas cidades-base <b>antes de precisar</b>. Em trechos como a Carretera Austral, o veterinário mais próximo pode estar a <b>centenas de quilômetros</b>. Salve contatos offline junto com os documentos.</p>
+      </div>
+      <div class="card acc" style="--ac:var(--teal)">
+        <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v6c0 5-4 8-9 9-5-1-9-4-9-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span>A pasta do pet</h3>
+        <p>Uma pasta física só dele: certificado, carteira de vacinação, comprovante do microchip, receitas e uma <b>foto atual sua com ele</b> (ajuda a provar posse). Mais uma cópia digital offline no celular.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 08 · CHECKLIST ===== -->
+  <div class="section">
+    <div class="section-h"><span class="sn">08</span><h2>Checklist do pet</h2><span class="note">salva sozinho</span></div>
+    <div class="checks" id="petchecks"></div>
+  </div>
+
+  <footer>
+    <span>PLANEJADOR DE ROTEIROS · PET</span>
+    <span>Fontes oficiais: MAPA/VIGIAGRO · SENASA (AR) · SAG (CL) · e órgãos de cada país</span>
+  </footer>
+</div>
+
+<script>
+/* ===== países ===== */
+const PAISES = [
+  { f:'🇦🇷', n:'Argentina', org:'SENASA', bloco:'mercosul', c:'#2563EB',
+    reqs:[
+      'CVI emitido pela autoridade oficial do país de origem, <b>com versão em espanhol</b>.',
+      'Atestado de saúde, <b>antirrábica vigente</b> e antiparasitário interno e externo.',
+      'Na fronteira, o SENASA faz verificação <b>documental, física e de identidade</b>.'
+    ],
+    alerta:'O CVI dá <b>60 dias corridos</b> de permanência a partir da emissão, desde que a antirrábica siga vigente. Entrada como bagagem acompanhada <b>não tem custo</b>.',
+    url:'https://www.argentina.gob.ar/senasa/informacion-al-viajero/ingresar-o-regresar-al-pais/ingresos-con-perros-yo-gatos' },
+
+  { f:'🇨🇱', n:'Chile', org:'SAG', bloco:'associado', c:'#DC2626',
+    reqs:[
+      '<b>Autorização Sanitária solicitada ao SAG com antecedência</b> — não é emitida na hora.',
+      'Exame clínico <b>até 10 dias</b> antes da emissão do certificado.',
+      'Antirrábica vigente; primeira dose <b>≥ 21 dias</b> antes da entrada.',
+      'Antiparasitário interno e externo entre <b>5 e 30 dias</b> antes do certificado.'
+    ],
+    alerta:'<b>Mudou em 27/07/2026:</b> identificação individual permanente (microchip ou tatuagem) passou a ser <b>obrigatória</b>, e o número precisa constar no certificado e conferir com o do animal.',
+    url:'https://www.sag.gob.cl/tramites/solicitud-de-autorizacion-sanitaria-para-ingresar-chile-con-perros-y-gatos-mascotas' },
+
+  { f:'🇺🇾', n:'Uruguai', org:'MGAP · DGSG', bloco:'mercosul', c:'#0EA5C0',
+    reqs:[
+      'CVI no <b>modelo Mercosul</b> vigente (Res. GMC/RES nº 20/2024).',
+      'Antirrábica vigente, antiparasitário e atestado de saúde recente.',
+      'Entrada terrestre pelos passos habituais (Chuí, Rivera, Aceguá, Barra do Quaraí).'
+    ],
+    alerta:'',
+    url:'https://www.gub.uy/ministerio-ganaderia-agricultura-pesca/' },
+
+  { f:'🇵🇾', n:'Paraguai', org:'SENACSA', bloco:'mercosul', c:'#DB2777',
+    reqs:[
+      'CVI no <b>modelo Mercosul</b> vigente.',
+      'Antirrábica vigente, antiparasitário e atestado de saúde.',
+      'Entrada terrestre comum por Foz do Iguaçu e Ponta Porã.'
+    ],
+    alerta:'',
+    url:'https://www.senacsa.gov.py/' },
+
+  { f:'🇧🇴', n:'Bolívia', org:'SENASAG', bloco:'mercosul', c:'#D97706',
+    reqs:[
+      'Certificado sanitário emitido pela autoridade oficial brasileira.',
+      'Antirrábica vigente, antiparasitário e atestado de saúde.',
+      'Entrada terrestre por Corumbá/Puerto Quijarro, Cáceres e Guajará-Mirim.'
+    ],
+    alerta:'A Bolívia aderiu ao Mercosul recentemente — <b>confirme com o SENASAG</b> se já adota o modelo harmonizado de CVI ou mantém certificado próprio.',
+    url:'https://www.senasag.gob.bo/' },
+
+  { f:'🇵🇪', n:'Peru', org:'SENASA Peru', bloco:'associado', c:'#7C3AED',
+    reqs:[
+      'Certificado sanitário de exportação — <b>solicitar com 72h de antecedência</b>.',
+      'Antirrábica vigente. Para cães, também <b>parvovirose, cinomose, hepatite e leptospirose</b>.',
+      'Antiparasitário interno e externo <b>até 30 dias</b> antes da viagem.'
+    ],
+    alerta:'O Peru pede <b>mais vacinas que os países do Mercosul</b>. Planeje o calendário vacinal com meses de antecedência se o roteiro passar por lá.',
+    url:'https://www.gob.pe/institucion/senasa/campa%C3%B1as/5651-viaja-con-tu-mascota' },
+
+  { f:'🇨🇴', n:'Colômbia', org:'ICA', bloco:'associado', c:'#2E9E5B',
+    reqs:[
+      'Certificado sanitário emitido pela autoridade oficial do país de origem.',
+      'Antirrábica vigente, antiparasitário e atestado de saúde.',
+      'A certificação de exportação/importação é responsabilidade do <b>ICA</b>.'
+    ],
+    alerta:'',
+    url:'https://www.ica.gov.co/' },
+
+  { f:'🇪🇨', n:'Equador', org:'AGROCALIDAD', bloco:'associado', c:'#F59E0B',
+    reqs:[
+      'Certificado sanitário emitido pela autoridade oficial do país de origem.',
+      'Antirrábica vigente, antiparasitário e atestado de saúde.',
+      'Certificação de entrada a cargo da <b>AGROCALIDAD</b>.'
+    ],
+    alerta:'',
+    url:'https://www.agrocalidad.gob.ec/' },
+
+  { f:'🇻🇪', n:'Venezuela', org:'INSAI', bloco:'outros', c:'#64748B',
+    reqs:[
+      'Certificado sanitário emitido pela autoridade oficial do país de origem.',
+      'Antirrábica vigente e atestado de saúde.',
+      'Entrada terrestre por Pacaraima (RR) — <b>situação de fronteira instável</b>.'
+    ],
+    alerta:'Além da parte sanitária, <b>confirme a situação da fronteira e as recomendações consulares</b> antes de planejar a entrada.',
+    url:'https://www.insai.gob.ve/' },
+
+  { f:'🇬🇾', n:'Guiana', org:'Ministry of Agriculture', bloco:'outros', c:'#64748B',
+    reqs:[
+      'Certificado sanitário internacional, normalmente <b>em inglês</b>.',
+      'Antirrábica vigente e atestado de saúde.',
+      'Pode exigir <b>permissão de importação prévia</b>.'
+    ],
+    alerta:'Rota pouco percorrida com pet. <b>Contate o órgão antes</b> — as exigências não são bem documentadas online.',
+    url:'https://agriculture.gov.gy/' },
+
+  { f:'🇸🇷', n:'Suriname', org:'Serviço Veterinário', bloco:'outros', c:'#64748B',
+    reqs:[
+      'Certificado sanitário internacional e antirrábica vigente.',
+      'Pode exigir <b>permissão de importação prévia</b>.',
+      'Documentação em <b>inglês ou holandês</b>.'
+    ],
+    alerta:'Rota pouco percorrida com pet. <b>Contate o órgão antes</b> de contar com essa entrada.',
+    url:'https://www.gov.sr/' },
+
+  { f:'🇬🇫', n:'Guiana Francesa', org:'Regras da União Europeia', bloco:'outros', c:'#1D4ED8',
+    reqs:[
+      'É <b>território da União Europeia</b> — valem as regras europeias, não as sul-americanas.',
+      '<b>Microchip obrigatório</b> e antirrábica vigente.',
+      'Pode exigir <b>teste sorológico de titulação de anticorpos antirrábicos</b>, feito com meses de antecedência.'
+    ],
+    alerta:'De longe o destino <b>mais exigente</b> da América do Sul. Se o roteiro inclui a Guiana Francesa, comece o processo com <b>4 a 6 meses</b> de antecedência e confirme as exigências atuais.',
+    url:'https://agriculture.gouv.fr/' },
+
+  { f:'🇧🇷', n:'Brasil (retorno)', org:'MAPA · VIGIAGRO', bloco:'outros', c:'#16A34A',
+    reqs:[
+      'Certificado emitido pela <b>autoridade veterinária oficial do país onde o pet está</b>.',
+      'Antirrábica e antiparasitário <b>vigentes na data do retorno</b>.',
+      'O CVI usado na ida <b>não serve</b> para a volta.'
+    ],
+    alerta:'Reserve <b>alguns dias no fim do roteiro</b> para consulta veterinária local e emissão do certificado de saída — em geral exige agendamento.',
+    url:'https://www.gov.br/pt-br/temas/viajar-para-outro-pais-com-seu-cao-ou-gato-cvi' },
+];
+
+const FILTROS = [
+  ['todos','Todos'],
+  ['mercosul','Mercosul'],
+  ['associado','Associados'],
+  ['outros','Demais'],
+];
+
+const cwrap = document.getElementById('countries');
+const fwrap = document.getElementById('filters');
+
+PAISES.forEach(p=>{
+  const el = document.createElement('div');
+  el.className = 'ccard';
+  el.style.setProperty('--cc', p.c);
+  el.dataset.bloco = p.bloco;
+  const tag = p.bloco==='mercosul' ? 'Mercosul' : p.bloco==='associado' ? 'Associado' : '';
+  el.innerHTML = `
+    <div class="chead">
+      <span class="flag">${p.f}</span>
+      <div>
+        <h3>${p.n}</h3>
+        <div class="auth">${p.org}</div>
+      </div>
+      ${tag?`<span class="tag">${tag}</span>`:''}
+    </div>
+    <ul>${p.reqs.map(r=>`<li>${r}</li>`).join('')}</ul>
+    ${p.alerta?`<div class="alert">${p.alerta}</div>`:''}
+    <div class="src">
+      <a href="${p.url}" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg>
+        Fonte oficial
+      </a>
+    </div>`;
+  cwrap.appendChild(el);
+});
+
+FILTROS.forEach(([k,label],i)=>{
+  const b = document.createElement('button');
+  b.className = 'chip'+(i===0?' on':'');
+  b.textContent = label;
+  b.onclick = ()=>{
+    fwrap.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+    b.classList.add('on');
+    cwrap.querySelectorAll('.ccard').forEach(c=>{
+      c.classList.toggle('hidden', k!=='todos' && c.dataset.bloco!==k);
+    });
+  };
+  fwrap.appendChild(b);
+});
+
+/* ===== checklist ===== */
+const items = [
+  ["Microchip implantado","padrão ISO · número anotado"],
+  ["Carteira de vacinação","antirrábica vigente, com data"],
+  ["Antiparasitário registrado","interno e externo · 5 a 15 dias antes"],
+  ["Atestado de saúde","≤ 10 dias · vet com CRMV ativo"],
+  ["CVI ou Passaporte emitido","modelo Mercosul vigente"],
+  ["Autorização prévia do destino","Chile (SAG) e outros que exijam"],
+  ["Cópia digital offline","tudo fotografado no celular"],
+  ["Receitas de uso contínuo","medicação com prescrição"],
+  ["Estoque de ração","para o trecho sem reposição"],
+  ["Clínicas veterinárias da rota","contatos salvos offline"],
+  ["Foto sua com o pet","ajuda a comprovar posse"],
+  ["Plano para parques que barram cães","quem fica ou rota alternativa"],
+  ["Certificado de retorno","providenciar no país antes de voltar"],
+];
+const pw = document.getElementById('petchecks');
+const KEY = 'eraAustral.petchecks';
+let state = {};
+try{ state = JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ state = {}; }
+items.forEach((d,i)=>{
+  const row = document.createElement('div');
+  row.className = 'chk'+(state[i]?' done':'');
+  row.innerHTML = `<span class="box"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span>
+    <span class="ctxt">${d[0]}<small>${d[1]}</small></span>`;
+  row.onclick = ()=>{ state[i] = !state[i]; row.classList.toggle('done', state[i]);
+    localStorage.setItem(KEY, JSON.stringify(state)); };
+  pw.appendChild(row);
+});
+</script>
+<script src="dados.js"></script>
+<script src="roteiros.js"></script>
+<script src="app-shared.js"></script>
+<script>(function(){try{if(!window.PLANNER)return;var b=PLANNER.regionBanner();var w=document.querySelector(".wrap");if(!b||!w)return;var bl=w.querySelector(".backlink");if(bl)bl.insertAdjacentElement("afterend",b);else w.insertBefore(b,w.firstChild);}catch(e){}})();</script>
+</body>
+</html>
