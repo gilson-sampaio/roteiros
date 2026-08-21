@@ -969,6 +969,65 @@ window.ROTEIROS = (function(){
     ], essencial:{ min:4000, max:7400, media:5700, economia:"~20%", corteKm:"≈ 200 km", corteNote:"sem a extensão a Treze Tílias" } }
   };
 
+  /* ---------- SC4: Alto Vale & Pomerode ---------- */
+  const sc4f = [
+    { id:"e0", nome:"O rio",        cor:"#0E7490", mes:"Dias 1–2" },
+    { id:"e1", nome:"As colônias",  cor:"#3F6212", mes:"Dias 3–4" },
+  ];
+  const sc4 = {
+    id:"sc-alto-vale-pomerode",
+    nome:"Alto Vale & Pomerode",
+    tagline:"Descendo o Itajaí-Açu, das corredeiras ao enxaimel",
+    accent:"#0E7490", origem:"Rio do Sul", regiao:"Santa Catarina — Alto Vale do Itajaí", regiaoId:"santa-catarina",
+    periodo:"Set–Nov · Mar–Mai", semanas:1,
+    distancia_completa:"≈ 120 km", distancia_essencial:"≈ 120 km",
+    resumo:"O eixo da BR-470 de Rio do Sul a Pomerode: a confluência que forma o Itajaí-Açu, o rafting de Ibirama e Apiúna, as colônias italianas de Ascurra e Rodeio, e os 16 km da Rota do Enxaimel — a maior concentração de casas enxaimel fora da Europa.",
+    seasonTip:{ h:"Quando ir?", p:"<b>Primavera e outono</b> são amenos e ideais para o rio e a estrada. Em <b>outubro</b>, o vale entra no clima da Oktoberfest e lota. Para o <b>rafting</b>, o nível do rio manda: cheia demais e a operação migra para os rios Hercílio ou Neise." },
+    order:["O rio","As colônias"],
+    phaseMes:{ "O rio":"Rio do Sul, Ibirama & Apiúna", "As colônias":"Rodeio, Timbó & Pomerode" },
+    fases:Object.fromEntries(sc4f.map(f=>[f.id,f])), fasesList:sc4f,
+    weeks:[
+      {n:1, datas:"Dias 1–2", mes:"O rio", fase:"e0",
+       from:"Rio do Sul", to:"Apiúna", km:"≈ 50 km",
+       reg:"Rio do Sul · Ibirama · Apiúna",
+       desc:"Saída de <b>Rio do Sul</b>, no encontro do Itajaí do Sul com o Itajaí do Oeste, e descida pela <b>BR-470</b> até <b>Ibirama</b> e <b>Apiúna</b> — o trecho de <b>rafting</b> do vale, com 7,5 km de corredeiras entre as classes II e IV.",
+       focos:[["Rafting","atracao"],["Alto Vale","cidade"]],
+       parque:"Vale do Itajaí-Açu",
+       comer:"Cozinha do vale · truta e cucas",
+       pernoite:["camping","Ibirama ou Apiúna"],
+       dica:"Confirme o nível do rio por telefone na véspera: cheia demais desloca a descida para os rios Hercílio ou Neise, mas não cancela o passeio."},
+      {n:2, datas:"Dias 3–4", mes:"As colônias", fase:"e1",
+       from:"Apiúna", to:"Pomerode", km:"≈ 65 km",
+       reg:"Ascurra · Rodeio · Timbó · Pomerode",
+       desc:"O vale troca de sotaque: <b>Ascurra</b> e <b>Rodeio</b> são colônia italiana, <b>Timbó</b> é germano-italiana e tem as ciclovias do vale. O fim é <b>Pomerode</b> e os 16 km da <b>Rota do Enxaimel</b>, com mais de 50 casas catalogadas e tombamento do IPHAN.",
+       focos:[["Rota do Enxaimel","atracao"],["Colônia italiana","cidade"]],
+       parque:"Parque Central de Timbó · ciclovias do vale",
+       comer:"Colonial italiano em Rodeio · marreco e cucas em Pomerode",
+       pernoite:["camping","Camping Vale Europeu ou Manga Camping, em Pomerode"],
+       dica:"Blumenau fica a ~30 km de Pomerode — dá para emendar as cervejarias sem refazer caminho."},
+    ],
+    mapa:{ fases:sc4f, atracoes:{
+      pomerode: { estrela:true, acc:"sim", nota:"Rota do Enxaimel: 16 km e 50+ casas, tombada pelo IPHAN." },
+      apiuna:   { estrela:true, acc:"sim", nota:"Base do rafting no Itajaí-Açu, na beira da BR-470." },
+    }, wp:[
+      {id:"riodosul", n:"Rio do Sul", lat:-27.2144, lng:-49.6431, t:"origem", f:"e0", sem:1, var:"both", hl:true, d:"Confluência que forma o Itajaí-Açu; porta do Alto Vale."},
+      {id:"ibirama", n:"Ibirama", lat:-27.0553, lng:-49.5178, t:"cidade", f:"e0", sem:1, var:"both", d:"Base de rafting; rio Hercílio como alternativa na cheia."},
+      {id:"apiuna", n:"Apiúna", lat:-27.0378, lng:-49.3906, t:"atracao", f:"e0", sem:1, var:"both", hl:true, d:"Corredeiras do Itajaí-Açu; operações no km 107 da BR-470."},
+      {id:"ascurra", n:"Ascurra", lat:-26.9553, lng:-49.3789, t:"cidade", f:"e1", sem:2, var:"both", d:"Colônia italiana do vale."},
+      {id:"rodeio", n:"Rodeio", lat:-26.9244, lng:-49.3658, t:"cidade", f:"e1", sem:2, var:"both", d:"Colônia italiana de tradição vinícola."},
+      {id:"timbo", n:"Timbó", lat:-26.8231, lng:-49.2714, t:"cidade", f:"e1", sem:2, var:"both", d:"Vila germano-italiana com parques e ciclovias."},
+      {id:"pomerode", n:"Pomerode", lat:-26.7408, lng:-49.1786, t:"atracao", f:"e1", sem:2, var:"both", hl:true, d:"A cidade mais alemã do Brasil; Rota do Enxaimel e Zoo."},
+    ]},
+    custos:{ dias:4, categorias:[
+      {nome:"Combustível", min:120, max:220, obs:"≈120 km · trechos curtos"},
+      {nome:"Hospedagem", min:400, max:1200, obs:"3 noites (camping puxa para baixo)"},
+      {nome:"Alimentação", min:400, max:800, obs:"Colonial italiano e cozinha alemã"},
+      {nome:"Rafting", min:180, max:400, obs:"Por pessoa, com equipamento e treinamento"},
+      {nome:"Ingressos & passeios", min:80, max:220, obs:"Zoo de Pomerode, Museu Pomerano"},
+      {nome:"Pedágios", min:20, max:60, obs:"BR-470"},
+    ], essencial:{ min:1200, max:2900, media:2050, economia:"~15%", corteKm:"—", corteNote:"roteiro já é curto; a economia vem de dormir em camping" } }
+  };
+
   /* ========================================================================
      ===============  RIO GRANDE DO SUL  =====================================
      ======================================================================== */
@@ -3376,7 +3435,7 @@ window.ROTEIROS = (function(){
     ], essencial:{ min:3500, max:6500, media:5000, economia:"~20%", corteKm:"≈ 160 km", corteNote:"sem o litoral norte mais distante (Baía da Traição)" } }
   };
 
-  var base = [roteiro1, roteiro2, mg1, mg2, mg3, mg4, mg5, mg6, sc1, sc2, sc3, rs1, rs2, ba1, go1, uy1, uy2, mt1, ms1, sp1, sp2, py1, bo1, pe1, py2, bo2, pe2, ar1, cl1, ec1, co1, ve1, ar2, cl2, ar3, cu1, cl3, ne1, ba2, cu2, co2, ve2, ce1, rn1, cc1, pern1, pb1];
+  var base = [roteiro1, roteiro2, mg1, mg2, mg3, mg4, mg5, mg6, sc1, sc2, sc3, sc4, rs1, rs2, ba1, go1, uy1, uy2, mt1, ms1, sp1, sp2, py1, bo1, pe1, py2, bo2, pe2, ar1, cl1, ec1, co1, ve1, ar2, cl2, ar3, cu1, cl3, ne1, ba2, cu2, co2, ve2, ce1, rn1, cc1, pern1, pb1];
   try{
     var custom = JSON.parse(localStorage.getItem('roteirosCustom')||'[]');
     if(Array.isArray(custom)) custom.forEach(function(c){ if(c && c.id) base.push(c); });

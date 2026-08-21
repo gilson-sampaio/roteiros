@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alto Vale &amp; Pomerode — Roteiro dia a dia (4 dias)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12271f; --slate:#4a6258; --faint:#8aa096;
+    --paper:#f1f7f4; --card:#fdfffe; --line:#d3e5dc;
+    --river:#0e7490; --river-d:#155e75; --moss:#3f6212; --moss-d:#365314;
+    --timber:#7c5e3b;
+    --shadow:0 14px 34px -20px rgba(16,60,50,.4);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",sans-serif;line-height:1.6;
+    background-image:radial-gradient(circle at 12% 8%, rgba(14,116,144,.08), transparent 38%),radial-gradient(circle at 88% 0%, rgba(63,98,18,.07), transparent 40%);}
+  .wrap{max-width:880px;margin:0 auto;padding:40px 26px 70px}
+  .hero{position:relative;background:linear-gradient(135deg,#0e7490 0%,#155e75 52%,#3f6212 150%);
+    color:#e8f6f2;border-radius:22px;padding:38px 38px 32px;overflow:hidden;box-shadow:var(--shadow)}
+  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;
+    background:radial-gradient(circle,rgba(63,98,18,.4),transparent 68%)}
+  .hero .flag{display:inline-flex;gap:5px;align-items:center;font-family:"JetBrains Mono",monospace;font-size:11px;
+    letter-spacing:.16em;text-transform:uppercase;color:#9fdbe4;margin-bottom:16px}
+  .hero .flag .dot{width:7px;height:7px;border-radius:50%;background:#67c9d8}
+  .hero h1{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:42px;line-height:1.02;letter-spacing:-.02em;position:relative}
+  .hero .sub{font-size:15.5px;color:#d5eee9;max-width:580px;margin-top:13px;position:relative}
+  .hero .facts{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px;position:relative}
+  .hero .fact{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:500}
+  .hero .fact b{font-family:"Space Grotesk",sans-serif;font-weight:600}
+  .route{display:flex;flex-wrap:wrap;gap:6px 4px;align-items:center;margin:26px 2px 8px;
+    font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:13.5px;color:var(--river-d)}
+  .route span{background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 11px;box-shadow:0 4px 12px -10px rgba(16,60,50,.5)}
+  .route i{color:var(--moss);font-style:normal;font-weight:700;padding:0 2px}
+  .note{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+    border-left:4px solid var(--river);border-radius:14px;padding:16px 18px;margin-top:18px;box-shadow:var(--shadow)}
+  .note svg{width:22px;height:22px;flex-shrink:0;stroke:var(--river);fill:none;stroke-width:1.8;margin-top:1px}
+  .note h4{font-family:"Space Grotesk",sans-serif;font-size:14px;margin-bottom:3px}
+  .note p{font-size:13.5px;color:var(--slate)}
+  .note b{color:var(--ink)}
+  .leg{display:flex;align-items:baseline;gap:12px;margin:40px 2px 6px}
+  .leg .lt{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:20px;color:var(--river)}
+  .leg .lk{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+  .leg .lr{flex:1;height:1px;background:var(--line)}
+  .day{display:flex;background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-top:16px;box-shadow:var(--shadow);overflow:hidden;break-inside:avoid}
+  .day .rail{flex-shrink:0;width:74px;background:linear-gradient(165deg,var(--river),var(--river-d));
+    color:#e8f6f2;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:18px 8px;gap:3px}
+  .day .rail .dn{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;opacity:.85}
+  .day .rail .dnum{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:30px;line-height:1}
+  .day.moss .rail{background:linear-gradient(165deg,var(--moss),var(--moss-d))}
+  .day .body{flex:1;padding:18px 20px 19px;min-width:0}
+  .day .loc{display:flex;align-items:center;gap:7px;font-family:"JetBrains Mono",monospace;font-size:11px;
+    letter-spacing:.04em;color:var(--river-d);text-transform:uppercase;font-weight:500}
+  .day.moss .loc{color:var(--moss-d)}
+  .day .loc svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+  .day .move{margin-left:auto;text-transform:none;letter-spacing:0;color:var(--faint);font-size:11px}
+  .day h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:19px;margin:6px 0 7px;letter-spacing:-.01em}
+  .day p{font-size:14px;color:#23392f}
+  .day p b{color:var(--ink);font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .chip{font-size:11.5px;font-weight:600;font-family:"Space Grotesk",sans-serif;color:var(--river-d);
+    background:rgba(14,116,144,.09);border:1px solid rgba(14,116,144,.2);border-radius:999px;padding:4px 10px}
+  .day.moss .chip{color:var(--moss-d);background:rgba(63,98,18,.1);border-color:rgba(63,98,18,.26)}
+  .meta{display:flex;flex-wrap:wrap;gap:7px 22px;margin-top:13px;padding-top:13px;border-top:1px dashed var(--line)}
+  .meta div{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:var(--slate);min-width:0}
+  .meta .ic{flex-shrink:0;width:15px;height:15px;margin-top:2px}
+  .meta .ic svg{width:15px;height:15px;stroke:var(--moss);fill:none;stroke-width:1.7}
+  .meta b{color:var(--ink);font-weight:600;font-family:"Space Grotesk",sans-serif}
+  .prac{margin-top:42px;background:linear-gradient(160deg,#fff,#e9f4ef);border:1px solid var(--line);
+    border-radius:18px;padding:26px 26px 22px;box-shadow:var(--shadow)}
+  .prac h2{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:18px;color:var(--river);margin-bottom:4px}
+  .prac .psub{font-size:13px;color:var(--slate);margin-bottom:18px}
+  .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 22px}
+  .pcard{display:flex;gap:11px;align-items:flex-start}
+  .pcard .pic{flex-shrink:0;width:34px;height:34px;border-radius:10px;background:rgba(14,116,144,.09);display:grid;place-items:center}
+  .pcard .pic svg{width:18px;height:18px;stroke:var(--river);fill:none;stroke-width:1.8}
+  .pcard h5{font-family:"Space Grotesk",sans-serif;font-size:13.5px;margin-bottom:2px}
+  .pcard p{font-size:12.5px;color:var(--slate)}
+  .foot{text-align:center;margin-top:34px;font-size:12px;color:var(--faint);font-family:"JetBrains Mono",monospace;letter-spacing:.03em}
+  .foot b{color:var(--river)}
+  .backapp{position:fixed;left:16px;bottom:16px;z-index:999;display:inline-flex;align-items:center;gap:8px;
+    text-decoration:none;font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:14px;color:#fff;
+    background:#12312a;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:11px 18px 11px 15px;
+    box-shadow:0 10px 28px -10px rgba(0,0,0,.55);transition:transform .12s,background .15s}
+  .backapp:hover{background:#1b463c;transform:translateY(-1px)}
+  .backapp svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2.2}
+  @media (max-width:640px){
+    .wrap{padding:24px 14px 50px}.hero{padding:28px 22px}.hero h1{font-size:30px}
+    .pgrid{grid-template-columns:1fr}.day .rail{width:60px}.day .move{display:none}
+  }
+  @media print{
+    body{background:#fff}.wrap{max-width:none;padding:0}
+    .hero,.day,.note,.prac{box-shadow:none}.day,.prac,.note{break-inside:avoid}.leg{break-after:avoid}
+    .backapp{display:none !important}
+    @page{margin:14mm}
+  }
+</style>
+</head>
+<body>
+  <a class="backapp" href="app.html"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Voltar ao app</a>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="flag"><span class="dot"></span>Santa Catarina · Alto Vale do Itajaí · roteiro dia a dia</div>
+    <h1>Do Alto Vale a Pomerode em 4 dias</h1>
+    <p class="sub">Descendo o Itajaí-Açu de Rio do Sul até Pomerode: as corredeiras de Ibirama e Apiúna, as colônias italianas de Ascurra e Rodeio, e a maior concentração de casas enxaimel fora da Europa.</p>
+    <div class="facts">
+      <span class="fact">🗓️ <b>4 dias</b></span>
+      <span class="fact">🛣️ <b>≈ 120 km</b></span>
+      <span class="fact">🚣 Rafting no <b>Itajaí-Açu</b></span>
+      <span class="fact">🏡 Rota do Enxaimel</span>
+    </div>
+  </header>
+
+  <div class="route">
+    <span>Rio do Sul</span><i>→</i><span>Ibirama</span><i>→</i><span>Apiúna</span><i>→</i><span>Ascurra</span><i>→</i><span>Rodeio</span><i>→</i><span>Timbó</span><i>→</i><span>Pomerode</span>
+  </div>
+
+  <div class="note">
+    <svg viewBox="0 0 24 24"><path d="M2 15c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0M2 10c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/></svg>
+    <div>
+      <h4>Rio cheio não cancela o rafting</h4>
+      <p>Quando o <b>Itajaí-Açu</b> está alto demais pela chuva e a descida fica insegura, a operação migra para os rios <b>Hercílio</b>, em Ibirama, e <b>Neise</b>, em Apiúna. Vale <b>ligar antes</b> em vez de desistir do dia. O percurso tem <b>7,5 km</b>, dividido em básico (classes II–III) e radical (III–IV).</p>
+    </div>
+  </div>
+
+  <!-- PARTE 1 -->
+  <div class="leg"><span class="lt">O rio</span><span class="lk">dias 1–2 · corredeiras do Alto Vale</span><span class="lr"></span></div>
+
+  <article class="day">
+    <div class="rail"><span class="dn">DIA</span><span class="dnum">1</span></div>
+    <div class="body">
+      <div class="loc"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zM12 9h.01"/></svg>Rio do Sul → Ibirama<span class="move">≈ 30 km</span></div>
+      <h3>Onde o Itajaí-Açu nasce da confluência</h3>
+      <p>Saída de <b>Rio do Sul</b>, cidade que cresceu no encontro do <b>Itajaí do Sul</b> com o <b>Itajaí do Oeste</b> — é dali que sai o Itajaí-Açu, o rio que dá nome e forma a todo o vale. Descida tranquila pela <b>BR-470</b> passando por Lontras até <b>Ibirama</b>, base das operações de rafting no alto do vale.</p>
+      <div class="chips"><span class="chip">confluência</span><span class="chip">BR-470</span><span class="chip">Alto Vale</span></div>
+      <div class="meta">
+        <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span><span><b>Trecho:</b> BR-470, sentido litoral</span></div>
+        <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 21V8l7-5 7 5v13M10 21v-6h4v6"/></svg></span><span><b>Dormir:</b> Ibirama ou Apiúna</span></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="day">
+    <div class="rail"><span class="dn">DIA</span><span class="dnum">2</span></div>
+    <div class="body">
+      <div class="loc"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zM12 9h.01"/></svg>Ibirama → Apiúna<span class="move">≈ 20 km</span></div>
+      <h3>Rafting nas corredeiras</h3>
+      <p>O dia do rio. O trecho <b>Ibirama–Apiúna</b> é o mais rodado do vale para <b>rafting</b>, com <b>7,5 km</b> de descida entre corredeiras e trechos calmos. As bases ficam na beira da <b>BR-470</b> — a da Ativa Rafting, por exemplo, no <b>km 107</b>, em Apiúna. Treinamento e equipamento de segurança entram no passeio.</p>
+      <div class="chips"><span class="chip">rafting</span><span class="chip">classes II a IV</span><span class="chip">km 107</span></div>
+      <div class="meta">
+        <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span><span><b>Antes de ir:</b> confirme o nível do rio por telefone</span></div>
+        <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 21V8l7-5 7 5v13M10 21v-6h4v6"/></svg></span><span><b>Dormir:</b> Apiúna</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- PARTE 2 -->
+  <div class="leg"><span class="lt">As colônias</span><span class="lk">dias 3–4 · italiana e alemã, lado a lado</span><span class="lr"></span></div>
+
+  <article class="day moss">
+    <div class="rail"><span class="dn">DIA</span><span class="dnum">3</span></div>
+    <div class="body">
+      <div class="loc"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zM12 9h.01"/></svg>Apiúna → Rodeio → Timbó<span class="move">≈ 45 km</span></div>
+      <h3>O vale troca de sotaque</h3>
+      <p>Poucos quilômetros abaixo, o vale deixa de ser alemão e vira italiano: <b>Ascurra</b> e <b>Rodeio</b> são colônia italiana, esta última de tradição vinícola. Passando por <b>Indaial</b>, chega-se a <b>Timbó</b> — germano-italiana, com o Parque Central e as <b>ciclovias do vale</b>, boas para esticar as pernas depois do rio.</p>
+      <div class="chips"><span class="chip">colônia italiana</span><span class="chip">vinho colonial</span><span class="chip">ciclovias</span></div>
+      <div class="meta">
+        <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10M19 21V10M3 10l9-6 9 6z"/></svg></span><span><b>Comer:</b> cozinha italiana colonial e cucas</span></div>
+        <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 21V8l7-5 7 5v13M10 21v-6h4v6"/></svg></span><span><b>Dormir:</b> Timbó — Camping São Bernardo por perto</span></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="day moss">
+    <div class="rail"><span class="dn">DIA</span><span class="dnum">4</span></div>
+    <div class="body">
+      <div class="loc"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zM12 9h.01"/></svg>Timbó → Pomerode<span class="move">≈ 20 km</span></div>
+      <h3>A Rota do Enxaimel</h3>
+      <p>Trecho curto de propósito: o dia é a <b>Rota do Enxaimel</b>, <b>16 km</b> de estrada rural com mais de <b>50 casas catalogadas</b> na técnica enxaimel — a <b>maior concentração fora da Europa</b>, tombada pelo <b>IPHAN</b> como Patrimônio Paisagístico e implantada pelo município em 2002. Sobrando tempo, o <b>Zoológico de Pomerode</b>, o <b>Museu Pomerano</b> e o mirante <b>Bergblick</b>. Blumenau fica a ~30 km, se quiser emendar as cervejarias.</p>
+      <div class="chips"><span class="chip">Rota do Enxaimel</span><span class="chip">IPHAN</span><span class="chip">Zoo de Pomerode</span></div>
+      <div class="meta">
+        <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h3l1.5-2h7L17 7h3v13H4zM12 9.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg></span><span><b>Não perca:</b> os 16 km da rota rural, sem pressa</span></div>
+        <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 21V8l7-5 7 5v13M10 21v-6h4v6"/></svg></span><span><b>Dormir:</b> Camping Vale Europeu ou Manga Camping</span></div>
+      </div>
+    </div>
+  </article>
+
+  <div class="note">
+    <svg viewBox="0 0 24 24"><path d="M3 21h18M12 3 4 9v12h16V9zM9 21v-6h6v6"/></svg>
+    <div>
+      <h4>Desvio: Doutor Pedrinho</h4>
+      <p>A noroeste de Timbó, <b>Doutor Pedrinho</b> é região de cachoeiras e tem dois campings na base do app — <b>Cachoeira Paulista</b> e <b>Recanto Cabana da Mata</b>. Sai da linha reta do vale, mas encaixa bem entre os dias 3 e 4 para quem tem um dia sobrando.</p>
+    </div>
+  </div>
+
+  <div class="prac">
+    <h2>Informações práticas</h2>
+    <p class="psub">O essencial para descer o vale de Rio do Sul a Pomerode.</p>
+    <div class="pgrid">
+      <div class="pcard"><div class="pic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></div><div><h5>Quando ir</h5><p>Primavera e outono são amenos. Em outubro, Blumenau e Pomerode entram no clima da Oktoberfest — e lotam.</p></div></div>
+      <div class="pcard"><div class="pic"><svg viewBox="0 0 24 24"><path d="M2 15c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/></svg></div><div><h5>Rafting</h5><p>Rio cheio muda o roteiro para os rios Hercílio ou Neise, não cancela. Confirme o nível por telefone no dia anterior.</p></div></div>
+      <div class="pcard"><div class="pic"><svg viewBox="0 0 24 24"><path d="M2 12h20M12 2a15 15 0 0 1 0 20"/></svg></div><div><h5>A estrada</h5><p>Tudo pela BR-470, no eixo do vale. São ≈ 120 km no total — dá para fazer direto em ~2 h, mas o trecho rende 4 dias.</p></div></div>
+      <div class="pcard"><div class="pic"><svg viewBox="0 0 24 24"><path d="M3 20h18L12 4z"/><path d="M9 20v-4h6v4"/></svg></div><div><h5>Motorhome</h5><p>Campings na base do app: Vale Europeu e Manga Camping (Pomerode), Sítio Pomerode, São Bernardo (Timbó) e Recanto do Vale.</p></div></div>
+      <div class="pcard"><div class="pic"><svg viewBox="0 0 24 24"><path d="M5 21V8l7-5 7 5v13"/></svg></div><div><h5>Rota do Enxaimel</h5><p>16 km de estrada rural, 50+ casas catalogadas. Reserve uma manhã inteira e vá devagar — o miolo é a paisagem.</p></div></div>
+      <div class="pcard"><div class="pic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10M19 21V10M3 10l9-6 9 6z"/></svg></div><div><h5>Sabores</h5><p>Colonial italiano em Ascurra e Rodeio; marreco recheado, cucas e cervejaria artesanal descendo para Pomerode.</p></div></div>
+    </div>
+  </div>
+
+  <p class="foot">Planejador de Roteiros · <b>Do Alto Vale a Pomerode em 4 dias</b> · roteiro flexível — ajuste os dias ao seu ritmo</p>
+
+</div>
+</body>
+</html>
