@@ -8,8 +8,8 @@
   /* ===================== PATAGÔNIA ===================== */
   "patagonia-completa": {
     atracoes:[
-      {n:"Agronômica / SC", base:"Agronômica / SC", nota:"Ponto de partida. Revisão final da Master, abastecer água, gás e despensa.", lat:-27.267, lng:-49.706},
-      {n:"Arredores de Buenos Aires (Luján)", base:"Arredores de Buenos Aires (Luján)", nota:"Contorno de Buenos Aires. Oficina/RV service e compras antes da Patagônia.", lat:-34.57, lng:-59.105},
+      {n:"Eduardo Castex / La Pampa", base:"Eduardo Castex / La Pampa", nota:"Ponto de partida. Revisão final da Master, abastecer água, gás e despensa.", lat:-35.916, lng:-64.296},
+      {n:"Santa Rosa (La Pampa)", base:"Santa Rosa (La Pampa)", nota:"Capital da província, a ~85 km da base. Primeiro apoio da rota: combustível, câmbio e compras grandes.", lat:-36.620, lng:-64.290},
       {n:"Puerto Madryn", base:"Puerto Madryn", nota:"Base clássica dos viajantes para a Península Valdés. Apoio completo: oficinas, GLP, água e supermercados grandes.", lat:-42.769, lng:-65.038},
       {n:"Península Valdés", base:"Río Negro", nota:"Baleias-francas (temporada ago–nov), pinguins e lobos-marinhos. Imperdível.", lat:-42.575, lng:-64.283},
       {n:"Puerto Deseado", base:"Ruta 3", nota:"Ria do Deseado, pinguins-de-Magalhães e toninhas. Desvio cênico da Ruta 3.", lat:-47.751, lng:-65.896},
@@ -30,7 +30,7 @@
       {n:"Puerto Montt", base:"Puerto Montt", nota:"Reentrada na malha asfaltada do Chile e grande hub logístico: oficinas, concessionárias e supermercados. Descanso e revisão.", lat:-41.469, lng:-72.942},
       {n:"Chiloé (Castro)", base:"Cruce dos Andes", nota:"Palafitas e igrejas de madeira (patrimônio). Desvio cultural opcional.", lat:-42.481, lng:-73.765},
       {n:"Bariloche", base:"Bariloche", nota:"De volta à Argentina pelos Sete Lagos. Apoio, chocolate e Cerro Catedral.", lat:-41.135, lng:-71.31},
-      {n:"Retorno a Agronômica / SC", base:"Retorno a Agronômica / SC", nota:"Volta pela Ruta 14 e Paso de los Libres. Fim da Carretera Austral.", lat:-27.2668, lng:-49.7085},
+      {n:"Retorno a Eduardo Castex", base:"Retorno a Eduardo Castex", nota:"Subida pela RN 22 e RN 35, de Neuquén a Santa Rosa e à base. Fim da Expedição.", lat:-35.916, lng:-64.296},
     ],
     museus:[
       {n:"Museo del Fin del Mundo", base:"Ushuaia", nota:"História natural e dos povos fueguinos, no fim do mundo."},
@@ -59,7 +59,7 @@
   },
   "carretera-direta": {
     atracoes:[
-      {n:"Agronômica / SC", base:"Agronômica / SC", nota:"Ponto de partida. Revisão final da Master, água, gás e despensa antes da estrada.", lat:-27.2655, lng:-49.7040},
+      {n:"Eduardo Castex / La Pampa", base:"Eduardo Castex / La Pampa", nota:"Ponto de partida. Revisão final da Master, água, gás e despensa antes da estrada.", lat:-35.916, lng:-64.296},
       {n:"San Carlos de Bariloche", base:"San Carlos de Bariloche", nota:"Base para preparar o cruce: oficina, GLP e o último grande apoio barato antes do Chile.", lat:-41.1348, lng:-71.3125},
       {n:"Puerto Varas", base:"Paso Cardenal Samoré", nota:"Cidade-base da Região dos Lagos, acessível de motorhome; Saltos del Petrohué e vulcão Osorno por perto.", lat:-41.32, lng:-72.985},
       {n:"Puerto Montt", base:"Puerto Montt", nota:"Hub logístico e km 0 oficial da Carretera Austral. Mercado Angelmó e grande apoio.", lat:-41.4688, lng:-72.9445},
@@ -75,7 +75,7 @@
       {n:"Confluência Baker & Neff", base:"RN Cerro Castillo", nota:"Mirante à beira da Ruta 7; estaciona-se em acostamento alargado. Trilha curta a pé.", lat:-47.13, lng:-72.77},
       {n:"Caleta Tortel", base:"RN Cerro Castillo", nota:"Vila sem ruas: só passarelas de ciprés. Estaciona-se na entrada e percorre-se a pé.", lat:-47.795, lng:-73.535},
       {n:"Villa O'Higgins (km 0)", base:"RN Cerro Castillo", nota:"Marco sul da Carretera Austral, fim da estrada, cercado de campos de gelo. Estrada sem saída.", lat:-48.4688, lng:-72.5625},
-      {n:"Retorno a Agronômica / SC", base:"Retorno a Agronômica / SC", nota:"Volta ao Brasil por Neuquén, Ruta 14 e Paso de los Libres. Fim da Carretera Direta.", lat:-27.2695, lng:-49.7064},
+      {n:"Retorno a Eduardo Castex", base:"Retorno a Eduardo Castex", nota:"Volta pela RN 22 e RN 35, via Neuquén e Santa Rosa. Fim da Carretera Direta.", lat:-35.916, lng:-64.296},
     ],
     museus:[
       {n:"Museo Regional de Aysén", base:"Coyhaique", nota:"História dos colonos e da região de Aysén."},
