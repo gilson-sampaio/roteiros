@@ -30,7 +30,7 @@
       {n:"Puerto Montt", base:"Puerto Montt", nota:"Reentrada na malha asfaltada do Chile e grande hub logístico: oficinas, concessionárias e supermercados. Descanso e revisão.", lat:-41.469, lng:-72.942},
       {n:"Chiloé (Castro)", base:"Cruce dos Andes", nota:"Palafitas e igrejas de madeira (patrimônio). Desvio cultural opcional.", lat:-42.481, lng:-73.765},
       {n:"Bariloche", base:"Bariloche", nota:"De volta à Argentina pelos Sete Lagos. Apoio, chocolate e Cerro Catedral.", lat:-41.135, lng:-71.31},
-      {n:"Retorno a Eduardo Castex", base:"Retorno a Eduardo Castex", nota:"Subida pela RN 22 e RN 35, de Neuquén a Santa Rosa e à base. Fim da Expedição.", lat:-35.916, lng:-64.296},
+      {n:"Campo Grande / MS", base:"Campo Grande / MS", nota:"Destino final: entrada no Brasil por Foz do Iguaçu e subida pela BR-163, via Cascavel, Guaíra e Dourados. Fim da Expedição.", lat:-20.464, lng:-54.616},
     ],
     museus:[
       {n:"Museo del Fin del Mundo", base:"Ushuaia", nota:"História natural e dos povos fueguinos, no fim do mundo."},
@@ -75,7 +75,7 @@
       {n:"Confluência Baker & Neff", base:"RN Cerro Castillo", nota:"Mirante à beira da Ruta 7; estaciona-se em acostamento alargado. Trilha curta a pé.", lat:-47.13, lng:-72.77},
       {n:"Caleta Tortel", base:"RN Cerro Castillo", nota:"Vila sem ruas: só passarelas de ciprés. Estaciona-se na entrada e percorre-se a pé.", lat:-47.795, lng:-73.535},
       {n:"Villa O'Higgins (km 0)", base:"RN Cerro Castillo", nota:"Marco sul da Carretera Austral, fim da estrada, cercado de campos de gelo. Estrada sem saída.", lat:-48.4688, lng:-72.5625},
-      {n:"Retorno a Eduardo Castex", base:"Retorno a Eduardo Castex", nota:"Volta pela RN 22 e RN 35, via Neuquén e Santa Rosa. Fim da Carretera Direta.", lat:-35.916, lng:-64.296},
+      {n:"Campo Grande / MS", base:"Campo Grande / MS", nota:"Destino final: entrada no Brasil por Foz do Iguaçu e subida pela BR-163, via Cascavel, Guaíra e Dourados. Fim da Carretera Direta.", lat:-20.464, lng:-54.616},
     ],
     museus:[
       {n:"Museo Regional de Aysén", base:"Coyhaique", nota:"História dos colonos e da região de Aysén."},

@@ -15,19 +15,20 @@ window.ROTEIROS = (function(){
     origem:"Eduardo Castex · La Pampa",
     regiao:"Patagônia · AR & CL",
     regiaoId:"patagonia",
-    periodo:"Ago–Nov 2026",
-    semanas:16,
+    periodo:"Ago–Dez 2026",
+    semanas:17,
     distancia_completa: window.EXP.meta.distancia_completa,
     distancia_essencial: window.EXP.meta.distancia_essencial,
-    resumo:"A grande volta: 16 semanas de Eduardo Castex (La Pampa) ao fim do mundo e de volta, cobrindo Península Valdés, Ushuaia, glaciares, Torres del Paine e a Carretera Austral.",
+    resumo:"A travessia: 17 semanas de Eduardo Castex (La Pampa) ao fim do mundo e daí ao Brasil, terminando em Campo Grande/MS — cobrindo Península Valdés, Ushuaia, glaciares, Torres del Paine e a Carretera Austral.",
     seasonTip:{
       h:"Por que esta ordem?",
       p:"A rota segue a <b>chegada da primavera austral</b>: agosto no <b>norte da Patagônia</b> (baleias em Madryn) e a descida ao <b>extremo sul</b> em out/nov, quando Ushuaia, Torres del Paine e a Carretera abrem com dias longos e estradas livres de neve."
     },
-    order:["Agosto","Setembro","Outubro","Novembro"],
+    order:["Agosto","Setembro","Outubro","Novembro","Dezembro"],
     phaseMes:{
       Agosto:"Saída, litoral & baleias", Setembro:"Atlântico sul & fim do mundo",
-      Outubro:"Glaciares, Torres & Carretera", Novembro:"Carretera, lagos & retorno"
+      Outubro:"Glaciares, Torres & Carretera", Novembro:"Carretera, lagos & travessia da Argentina",
+      Dezembro:"Entrada no Brasil & Campo Grande"
     },
     fases:FASES1,
     weeks:[
@@ -144,13 +145,20 @@ window.ROTEIROS = (function(){
        pernoite:["camping","Camping em Villa La Angostura"],
        dica:"Última imersão andina antes da longa volta — aproveite as termas.",
        optEss:"Essencial: pule Chiloé e cruze direto a Bariloche."},
-      {n:16, datas:"21–30 nov", mes:"Novembro", fase:"f7",
-       from:"Neuquén", to:"Eduardo Castex", km:"≈600 km",
-       reg:"Río Negro · La Pampa · retorno à base",
-       desc:"Saída da Patagônia e volta à base pela <b>RN 22</b> e <b>RN 35</b>, via Santa Rosa. Fim da Expedição.",
+      {n:16, datas:"21–29 nov", mes:"Novembro", fase:"f7",
+       from:"Neuquén", to:"Puerto Iguazú", km:"≈2.450 km",
+       reg:"Pampa · Santa Fé · Entre Ríos · Misiones",
+       desc:"Saída da Patagônia e <b>travessia diagonal da Argentina</b> rumo ao nordeste, por Santa Fé e Entre Ríos até <b>Posadas</b> e a fronteira em Puerto Iguazú.",
        focos:[["Apoio","apoio"]],
-       pernoite:["apoio","Pernoite de apoio em Santa Rosa"],
-       dica:"Com a base em La Pampa a volta virou uma etapa só — sobra tempo para esticar os Sete Lagos na semana anterior."},
+       pernoite:["apoio","Pernoites de apoio nas cidades-rota"],
+       dica:"Etapas de até 400 km/dia dão conta sem cansar a tripulação (e o pet). Na passagem por Rosario, use só postos movimentados e não pernoite na cidade."},
+      {n:17, datas:"30 nov–05 dez", mes:"Dezembro", fase:"f7",
+       from:"Foz do Iguaçu", to:"Campo Grande/MS", km:"≈850 km",
+       reg:"Fronteira · Paraná · Mato Grosso do Sul",
+       desc:"<b>Reentrada no Brasil</b> pela Ponte Tancredo Neves, as Cataratas do lado brasileiro e a subida pela <b>BR-163</b>, via Cascavel, Guaíra e Dourados, até <b>Campo Grande</b>. Fim da Expedição.",
+       focos:[["Travessia","#DC2626"],["Apoio","apoio"]],
+       pernoite:["apoio","Foz do Iguaçu e pernoite de apoio em Dourados"],
+       dica:"O pet precisa de certificado emitido no país de origem para reentrar no Brasil — resolva com o SENASA antes de chegar à fronteira, não na hora."},
     ]
   };
 
@@ -160,22 +168,22 @@ window.ROTEIROS = (function(){
     d2:{ id:"d2", nome:"Cruce dos Andes",     cor:"#2563EB" },
     d3:{ id:"d3", nome:"Carretera Norte",     cor:"#0EA5C0" },
     d4:{ id:"d4", nome:"Carretera Sul · km 0",cor:"#D97706" },
-    d5:{ id:"d5", nome:"Volta pelos Andes",   cor:"#2E9E5B" },
+    d5:{ id:"d5", nome:"Subida ao Brasil",    cor:"#2E9E5B" },
   };
 
   const roteiro2 = {
     id:"carretera-direta",
     nome:"Carretera Direta",
-    tagline:"Só a Ruta 7 — de La Pampa ao km 0 e volta",
+    tagline:"Só a Ruta 7 — de La Pampa ao km 0, e daí ao Brasil",
     accent:"#D97706",
     origem:"Eduardo Castex · La Pampa",
     regiao:"Carretera Austral · CL",
     regiaoId:"patagonia",
     periodo:"Out–Dez 2026",
-    semanas:8,
-    distancia_completa:"≈ 8.000 km",
-    distancia_essencial:"≈ 6.400 km",
-    resumo:"Foco total na Carretera Austral: sai de La Pampa, cruza os Andes até Puerto Montt e percorre a Ruta 7 inteira de norte a sul, até o km 0 em Villa O'Higgins. Sem Valdés, Ushuaia ou Torres del Paine.",
+    semanas:9,
+    distancia_completa:"≈ 10.800 km",
+    distancia_essencial:"≈ 9.200 km",
+    resumo:"Foco total na Carretera Austral: sai de La Pampa, cruza os Andes até Puerto Montt e percorre a Ruta 7 inteira de norte a sul, até o km 0 em Villa O'Higgins — terminando em Campo Grande/MS. Sem Valdés, Ushuaia ou Torres del Paine.",
     seasonTip:{
       h:"Por que sair em outubro?",
       p:"A Carretera Austral fica no auge entre <b>nov e dez</b>: neve derretendo, cascatas cheias e ferries do norte (Hornopirém–Caleta Gonzalo) operando. Saindo de La Pampa em <b>meados de outubro</b>, você cruza os Andes e chega à Ruta 7 já na primavera plena, com dias longos e estradas abertas."
@@ -184,7 +192,7 @@ window.ROTEIROS = (function(){
     phaseMes:{
       Outubro:"Saída, Andes & entrada na Ruta 7",
       Novembro:"Carretera Austral — do norte ao km 0",
-      Dezembro:"Volta pelos Andes"
+      Dezembro:"Travessia da Argentina & chegada ao Brasil"
     },
     fases:FASES2,
     weeks:[
@@ -256,14 +264,22 @@ window.ROTEIROS = (function(){
        pernoite:["wild","Wild camping na Ruta 40 → apoio em Bariloche"],
        dica:"Atenção ao vento cruzado na Ruta 40: reduza a velocidade e segure firme o volante. Postos espaçados — leve diesel reserva.",
        optEss:"Essencial: mesma volta, apenas mais curta por ter encerrado a ida em Tortel/Cochrane."},
-      {n:8, datas:"26 nov–02 dez", mes:"Dezembro", fase:"d5",
-       from:"Bariloche", to:"Eduardo Castex", km:"≈950 km",
-       reg:"Neuquén · La Pampa · retorno à base",
-       desc:"Saída da Patagônia e volta à base pela <b>RN 22</b> e <b>RN 35</b>, via Neuquén e Santa Rosa. Fim da Carretera Direta.",
+      {n:8, datas:"26 nov–04 dez", mes:"Dezembro", fase:"d5",
+       from:"Bariloche", to:"Puerto Iguazú", km:"≈2.900 km",
+       reg:"Neuquén · Pampa · Santa Fé · Misiones",
+       desc:"Saída da Patagônia e <b>travessia diagonal da Argentina</b> rumo ao nordeste, por Neuquén, Santa Fé e Entre Ríos, até <b>Posadas</b> e a fronteira em Puerto Iguazú.",
        focos:[["Apoio","apoio"]],
-       comer:"Pausas de apoio nas cidades-rota; parrilla em Neuquén ou Santa Rosa",
-       pernoite:["apoio","Pernoite de apoio em Neuquén ou Santa Rosa"],
-       dica:"A volta cabe em dois dias tranquilos — não precisa mais fatiar a semana inteira em etapas de 500 km."},
+       comer:"Pausas de apoio nas cidades-rota; parrilla em Neuquén ou Santa Fé",
+       pernoite:["apoio","Pernoites de apoio nas cidades-rota"],
+       dica:"Divida em etapas de até 400 km/dia. Na passagem por Rosario, use só postos movimentados e não pernoite na cidade."},
+      {n:9, datas:"05–09 dez", mes:"Dezembro", fase:"d5",
+       from:"Foz do Iguaçu", to:"Campo Grande/MS", km:"≈850 km",
+       reg:"Fronteira · Paraná · Mato Grosso do Sul",
+       desc:"<b>Reentrada no Brasil</b> pela Ponte Tancredo Neves, as Cataratas do lado brasileiro e a subida pela <b>BR-163</b>, via Cascavel, Guaíra e Dourados, até <b>Campo Grande</b>. Fim da Carretera Direta.",
+       focos:[["Travessia","#DC2626"],["Apoio","apoio"]],
+       comer:"Peixe de rio em Foz · churrasco em Dourados",
+       pernoite:["apoio","Foz do Iguaçu e pernoite de apoio em Dourados"],
+       dica:"O pet precisa de certificado emitido no país de origem para reentrar no Brasil — resolva com o SENASA antes de chegar à fronteira, não na hora."},
     ]
   };
 
@@ -278,7 +294,7 @@ window.ROTEIROS = (function(){
     { id:"d2", nome:"Cruce dos Andes",      mes:"Outubro",  cor:"#2563EB" },
     { id:"d3", nome:"Carretera Norte",      mes:"Out / Nov",cor:"#0EA5C0" },
     { id:"d4", nome:"Carretera Sul · km 0", mes:"Novembro", cor:"#D97706" },
-    { id:"d5", nome:"Volta pelos Andes",    mes:"Nov / Dez",cor:"#2E9E5B" },
+    { id:"d5", nome:"Subida ao Brasil",     mes:"Nov / Dez",cor:"#2E9E5B" },
   ];
   roteiro2.mapa = {
     fases: roteiro2.fasesList,
@@ -352,9 +368,15 @@ window.ROTEIROS = (function(){
       {id:"peritomorenoar", n:"Perito Moreno (AR)", lat:-46.590, lng:-70.930, t:"apoio", f:"d5", sem:7, var:"both",
         d:"Apoio na estepe antes da longa subida pela Ruta 40. Postos espaçados — leve diesel reserva."},
       {id:"esquel", n:"Esquel", lat:-42.910, lng:-71.318, t:"cidade", f:"d5", sem:7, var:"both",
-        d:"Última cidade-montanha andina na volta, antes de seguir rumo ao norte e à base."},
-      {id:"retorno", n:"Retorno a Eduardo Castex", lat:-35.916, lng:-64.296, t:"origem", f:"d5", sem:8, var:"both", hl:true,
-        d:"Volta pela RN 22 e RN 35, via Neuquén e Santa Rosa. Fim da Carretera Direta."},
+        d:"Última cidade-montanha andina na volta, antes de seguir rumo ao nordeste."},
+      {id:"posadas", n:"Posadas (Misiones)", lat:-27.367, lng:-55.894, t:"cidade", f:"d5", sem:8, var:"both",
+        d:"Última grande cidade argentina da subida. Apoio e combustível antes de Iguazú."},
+      {id:"puertoiguazu", n:"Fronteira Puerto Iguazú", lat:-25.611, lng:-54.576, t:"fronteira", f:"d5", sem:8, var:"both", hl:true,
+        d:"Saída da Argentina pela Ponte Tancredo Neves. Aduana, migração e o CVI do pet emitido pelo SENASA."},
+      {id:"foz", n:"Foz do Iguaçu / PR", lat:-25.530, lng:-54.583, t:"cidade", f:"d5", sem:9, var:"both",
+        d:"Reentrada no Brasil. Cataratas do lado brasileiro e o primeiro grande apoio em território nacional."},
+      {id:"campogrande", n:"Campo Grande / MS", lat:-20.464, lng:-54.616, t:"origem", f:"d5", sem:9, var:"both", hl:true,
+        d:"Destino final: subida pela BR-163 via Cascavel, Guaíra e Dourados. Fim da Carretera Direta."},
     ]
   };
 

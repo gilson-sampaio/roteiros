@@ -7,9 +7,10 @@ window.EXP = (function(){
     veiculo: "Motorhome sobre Renault Master 2022",
     tripulacao: "2 pessoas + 1 pet",
     origem: "Eduardo Castex · La Pampa · Argentina",
-    periodo: "Agosto a Novembro de 2026",
-    distancia_completa: "≈ 13.600 km",
-    distancia_essencial: "≈ 10.900 km",
+    destino: "Campo Grande · MS · Brasil",
+    periodo: "Agosto a Dezembro de 2026",
+    distancia_completa: "≈ 16.300 km",
+    distancia_essencial: "≈ 13.600 km",
   };
 
   /* tipos de ponto -> cor + rótulo + ícone (emoji só na legenda/popup) */
@@ -34,7 +35,7 @@ window.EXP = (function(){
     { id:"f4", nome:"Fim do Mundo",          mes:"Setembro", cor:"#7C3AED" },
     { id:"f5", nome:"Glaciares & Torres",    mes:"Outubro",  cor:"#0F766E" },
     { id:"f6", nome:"Carretera Austral",     mes:"Out / Nov",cor:"#D97706" },
-    { id:"f7", nome:"Lagos & Retorno",       mes:"Novembro", cor:"#2E9E5B" },
+    { id:"f7", nome:"Lagos & Subida ao Brasil", mes:"Nov / Dez", cor:"#2E9E5B" },
   ];
 
   /* waypoints — var: 'both' | 'completa' (só na rota completa) */
@@ -128,8 +129,14 @@ window.EXP = (function(){
       d:"Lago Lácar; termas próximas (Lahuen Co / Epulafquen). Última pausa andina."},
     {id:"neuquen", n:"Neuquén", lat:-38.951, lng:-68.059, t:"apoio", f:"f7", sem:16, var:"both",
       d:"Saída da Patagônia rumo ao norte. Revisão antes da longa volta."},
-    {id:"retorno", n:"Retorno a Eduardo Castex", lat:-35.916, lng:-64.296, t:"origem", f:"f7", sem:16, var:"both",
-      d:"Subida pela RN 22 e RN 35, de Neuquén a Santa Rosa e à base. Fim da Expedição.", hl:true},
+    {id:"posadas", n:"Posadas (Misiones)", lat:-27.367, lng:-55.894, t:"cidade", f:"f7", sem:16, var:"both",
+      d:"Última grande cidade argentina da subida, já no nordeste. Apoio e combustível antes de Iguazú."},
+    {id:"puertoiguazu", n:"Fronteira Puerto Iguazú", lat:-25.611, lng:-54.576, t:"fronteira", f:"f7", sem:16, var:"both",
+      d:"Saída da Argentina pela Ponte Tancredo Neves. Aduana, migração e o CVI do pet emitido pelo SENASA.", hl:true},
+    {id:"foz", n:"Foz do Iguaçu / PR", lat:-25.530, lng:-54.583, t:"cidade", f:"f7", sem:17, var:"both",
+      d:"Reentrada no Brasil. Cataratas do lado brasileiro e o primeiro grande apoio em território nacional."},
+    {id:"campogrande", n:"Campo Grande / MS", lat:-20.464, lng:-54.616, t:"origem", f:"f7", sem:17, var:"both",
+      d:"Destino final: subida pela BR-163 via Cascavel, Guaíra e Dourados. Fim da Expedição.", hl:true},
   ];
 
   /* ordem da polyline por variação (ids) */
@@ -142,7 +149,7 @@ window.EXP = (function(){
      nivel: 'alto' | 'medio' */
   const alertas = [
     {id:"a_conurbano", n:"Grande Buenos Aires (Conurbano)", lat:-34.680, lng:-58.530, cat:"roubo", nivel:"alto",
-      d:"Relatos frequentes de furto e quebra de vidro em semáforos e de assaltos na periferia. NÃO pernoite na região. Saindo de La Pampa a rota não passa por aqui — o alerta vale se você emendar um desvio a Buenos Aires."},
+      d:"Relatos frequentes de furto e quebra de vidro em semáforos e de assaltos na periferia. NÃO pernoite na região. A rota não entra no Conurbano — sai de La Pampa e volta pelo norte, por Santa Fé e Entre Ríos — mas o alerta vale se você emendar um desvio a Buenos Aires."},
     {id:"a_rosario", n:"Rosario (entorno)", lat:-32.950, lng:-60.660, cat:"roubo", nivel:"medio",
       d:"Cidade com índices de violência elevados em certas zonas. Use apenas postos/áreas movimentadas na passagem; evite pernoite urbano."},
     {id:"a_comodoro", n:"Comodoro Rivadavia / Caleta Olivia", lat:-46.100, lng:-67.530, cat:"protesto", nivel:"medio",
